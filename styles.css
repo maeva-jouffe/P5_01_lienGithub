@@ -1,0 +1,110 @@
+*{
+    color: #261624;
+}
+
+#logo{
+    width: 20%;
+}
+
+.navbar{
+    background-color: #f3e9f1;
+    border-radius: 0.5em;
+}
+
+.navbar-expand{
+    justify-content: space-around;
+}
+
+.nav-link{
+    font-size:1.5em;
+}
+a{
+    text-decoration: none;
+}
+
+a:visited{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.jumbotron{
+    background-color: rgba(38,22,36,255);
+    margin: 2em 0em 2em 0em;
+}
+
+h1, h2, #identifiantCommande{
+    color: #f3e9f1;
+    text-align: center;
+    font-family: 'Belligerent Madness', arial;
+    font-size: 1em;
+    padding: 1em;
+}
+
+h1 em{
+    color: #f3e9f1;
+    font-size: 2em;
+}
+
+.card{
+    max-width: 30em;
+    height: 28em;
+    margin-top: 2em;
+    cursor: pointer;
+    text-align: center;
+    transform: scale(1);
+    border: 2px solid #261624;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+.card-image-top{
+    width: 100%;
+}
+
+.card-text{
+    font-weight: bold;
+}
+.fa-shopping-basket{
+    
+    color: #261624;
+}
+
+main{
+    background-color: #f3e9f1;
+}
+
+.card img{
+    object-fit: cover;
+    height: 20em;
+}
+
+section{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+
+}
+table{
+    border: 1px solid #261624;
+    text-align: center;
+    width: 20em;
+}
+td, th{
+    border: 1px solid #261624;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+
+input{
+    width: 20em;
+    height: 2.5em;
+    margin: 0.5em;
+    display: block;
+}
+
+input[type=submit]{
+    background-color:#261624;
+    color: #f3e9f1;
+}
