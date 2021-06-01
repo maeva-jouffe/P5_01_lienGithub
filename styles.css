@@ -32,7 +32,12 @@ a:visited{
     margin: 2em 0em 2em 0em;
 }
 
-h1, h2, #identifiantCommande{
+.jumbotron p{
+    color:#f3e9f1;
+    text-align: center;
+}
+
+h1{
     color: #f3e9f1;
     text-align: center;
     font-family: 'Belligerent Madness', arial;
@@ -45,7 +50,11 @@ h1 em{
     font-size: 2em;
 }
 
-.card{
+.container-produits{
+    display: flex;
+    justify-content: space-around;
+}
+.blocProduit{
     max-width: 30em;
     height: 31em;
     margin-top: 2em;
@@ -54,21 +63,22 @@ h1 em{
     transform: scale(1);
     border: 2px solid #261624;
 }
-.card h2{
+
+.blocProduit img{
+    width: 100%;
+    object-fit: cover;
+    height: 20em;
+}
+.blocProduit h2{
     color:#261624;
     font-size:2em;
     padding: 0;
 }
-.card:hover{
-    transform: scale(1.05);
-}
-.card-image-top{
-    width: 100%;
+.blocProduit:hover{
+    transform: scaleY(1.05);
 }
 
-.card-text{
-    font-weight: bold;
-}
+
 .fa-shopping-basket{
     
     color: #261624;
@@ -76,11 +86,6 @@ h1 em{
 
 main{
     background-color: #f3e9f1;
-}
-
-.card img{
-    object-fit: cover;
-    height: 20em;
 }
 
 section{
