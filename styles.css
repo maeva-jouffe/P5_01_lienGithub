@@ -47,14 +47,18 @@ h1 em{
 
 .card{
     max-width: 30em;
-    height: 28em;
+    height: 31em;
     margin-top: 2em;
     cursor: pointer;
     text-align: center;
     transform: scale(1);
     border: 2px solid #261624;
 }
-
+.card h2{
+    color:#261624;
+    font-size:2em;
+    padding: 0;
+}
 .card:hover{
     transform: scale(1.05);
 }
@@ -103,6 +107,7 @@ input{
     margin: 0.5em;
     display: block;
 }
+
 
 input[type=submit]{
     background-color:#261624;
