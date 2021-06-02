@@ -31,9 +31,12 @@ for (i=0; i< value.length; i++){
         price[i] = (produit.price/100);
         imageUrl[i] = produit.imageUrl;
         _id[i] = produit._id;
+        couleur1[i] = produit.colors;
+        couleur2[i] = produit.colors;
+        couleur3[i] = produit.colors;
+        couleur4[i] = produit.colors;
      }) };
-
-
+     console.log(couleur1);
 // Paramètres de requête de l'URL pour la page produits
 const queryString_url_id = window.location.search;
 
@@ -43,7 +46,6 @@ const idRecupere = queryString_url_id.slice(1);
 
 //Affichage du produit cliqué dans la page produit
 const selection = value.find (element => element._id === idRecupere);
-console.log(selection);
 
 
 //Selection de la classe qui contiendra le produit
@@ -56,12 +58,17 @@ const structureProduitSelectionne =`
     <img src="${selection.imageUrl}"/>
     </div>
     <div class="col-5">
-        <h2>Ours en peluche ${selection.name}</h2>
+        <h2>Ours en peluche "${selection.name}"</h2>
         <p>${selection.description}</p>
         <p>${selection.price/100}€</p>
         <form method="post" action="#">
             <p><label for ="color">Choisissez votre couleur</label>
-            <select name="color" id="color"></select></p>
+            <select name="color" id="color">
+            <option value="color1">${selection.color1}</option>
+            <option value="color2">${selection.color2}</option>
+            <option value="color3">${selection.color3}</option>
+            <option value="color4">${selection.color4}</option>
+            </select>
         </form>
             <button type="button" class="btn btn-dark">Ajouter au panier</button>
     </div>
@@ -70,3 +77,8 @@ const structureProduitSelectionne =`
 affichageProduit.innerHTML = structureProduitSelectionne;
 
 });
+
+/////////////////////////////////    Panier    /////////////////////////////////////////////////////////
+
+const formulaireOption = document.querySelector("#color");
+console.log(formulaireOption);

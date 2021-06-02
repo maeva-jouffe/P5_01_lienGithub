@@ -38,6 +38,10 @@ for (i=0; i< value.length; i++){
         price[i] = (produit.price/100);
         imageUrl[i] = produit.imageUrl;
         _id[i] = produit._id;
+        couleur1[i] = produit.colors;
+        couleur2[i] = produit.colors;
+        couleur3[i] = produit.colors;
+        couleur4[i] = produit.colors;
     });
 
 //Structure HTML pour l'affichage des produits
