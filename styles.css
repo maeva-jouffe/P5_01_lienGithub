@@ -53,15 +53,18 @@ h1 em{
 .container-produits{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .blocProduit{
-    max-width: 30em;
-    height: 31em;
-    margin-top: 2em;
+    max-width: 25em;
+    min-height: 31em;
+    margin: 2em 0.5em 2em 0.5em;
     cursor: pointer;
     text-align: center;
     transform: scale(1);
     border: 2px solid #261624;
+    padding: 0.5em;
+    background-color: white;
 }
 
 .blocProduit img{
@@ -75,7 +78,7 @@ h1 em{
     padding: 0;
 }
 .blocProduit:hover{
-    transform: scaleY(1.05);
+    transform: scale(1.05);
 }
 
 

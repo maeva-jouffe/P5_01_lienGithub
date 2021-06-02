@@ -1,3 +1,5 @@
+
+//Récupération des données API
 fetch("http://localhost:3000/api/teddies")
 
 .then(function(res){
@@ -7,9 +9,11 @@ fetch("http://localhost:3000/api/teddies")
     }
 })
 .then(function(value){
-    console.log(value);
+
+
 
 // Mettre les données dans les variables
+let _id=[]
 let nomProduit=[];
 let description=[];
 let price=[];
@@ -34,11 +38,12 @@ for (i=0; i< value.length; i++){
         description[i] = produit.description;
         price[i] = (produit.price/100);
         imageUrl[i] = produit.imageUrl;
+        _id[i] = produit._id;
     });
 
 //Afficher tous les objets sur la page
-structureProduit = structureProduit + `
-<a href="produit.html">
+structureProduit += `
+<a href="produit.html?${_id[i]}">
     <div class="blocProduit">
         <div class="photoProduit">
             <img src="${imageUrl[i]}"/>
@@ -57,4 +62,24 @@ positionElement.innerHTML = structureProduit;
 }
 }
 affichageProduits(value);
-})
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Paramètres de requête de l'URL pour la page produits
+const queryString_url_id = window.location.search;
+
+//Supprimer le '?' de la chaine de caractères récupérée
+const Id = queryString_url_id.slice(1);
+
+//Affichage du produit cliqué dans la page produit
+const selectionProduit = value.find(element => value._id === Id);
+console.log(selectionProduit);
+
+
+
+
+
+});
+
