@@ -18,6 +18,7 @@
 .nav-link{
     font-size:1.5em;
 }
+
 a{
     text-decoration: none;
 }
@@ -40,7 +41,7 @@ a:visited{
 h1{
     color: #f3e9f1;
     text-align: center;
-    font-family: 'Belligerent Madness', arial;
+    font-family: 'comic sans MS', arial;
     font-size: 1em;
     padding: 1em;
 }
@@ -120,4 +121,32 @@ input{
 input[type=submit]{
     background-color:#261624;
     color: #f3e9f1;
+}
+
+.container_page_produit img{
+width : 100%;
+}
+
+footer{
+    background-color: #261624;
+    height: 6em;
+    margin-top: 2em;
+}
+
+footer ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+footer li{
+    list-style-type: none;
+    margin-top: 2em;
+}
+
+footer a{
+    color:#f3e9f1;
+}
+
+footer :visited{
+    color:#f3e9f1;
 }

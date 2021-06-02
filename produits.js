@@ -1,4 +1,3 @@
-
 //Récupération des données API
 fetch("http://localhost:3000/api/teddies")
 
@@ -28,7 +27,7 @@ let structureProduit = ""
 //Fonction qui affichera les produits dans la page web
 function affichageProduits(value){
 
-//selection element du DOM
+//Selection de la classe qui contiendra les produits
 const positionElement=document.querySelector(".container-produits");
 
 //Boucle pour afficher tous les objets dans la page
@@ -41,7 +40,7 @@ for (i=0; i< value.length; i++){
         _id[i] = produit._id;
     });
 
-//Afficher tous les objets sur la page
+//Structure HTML pour l'affichage des produits
 structureProduit += `
 <a href="produit.html?${_id[i]}">
     <div class="blocProduit">
@@ -62,24 +61,6 @@ positionElement.innerHTML = structureProduit;
 }
 }
 affichageProduits(value);
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Paramètres de requête de l'URL pour la page produits
-const queryString_url_id = window.location.search;
-
-//Supprimer le '?' de la chaine de caractères récupérée
-const Id = queryString_url_id.slice(1);
-
-//Affichage du produit cliqué dans la page produit
-const selectionProduit = value.find(element => value._id === Id);
-console.log(selectionProduit);
-
-
-
-
 
 });
 
