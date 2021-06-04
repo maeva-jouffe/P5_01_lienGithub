@@ -117,7 +117,15 @@ input{
     display: block;
 }
 
+.price{
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 1em;
+}
 
+.color{
+    font-weight: bold;
+}
 input[type=submit]{
     background-color:#261624;
     color: #f3e9f1;
@@ -125,6 +133,7 @@ input[type=submit]{
 
 .container_page_produit img{
 width : 100%;
+padding-left: 2em;
 }
 
 footer{

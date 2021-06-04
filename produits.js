@@ -17,11 +17,8 @@ let nomProduit=[];
 let description=[];
 let price=[];
 let imageUrl=[];
-let couleur1=[];
-let couleur2=[];
-let couleur3=[];
-let couleur4=[];
 let structureProduit = ""
+
 
 
 //Fonction qui affichera les produits dans la page web
@@ -38,27 +35,24 @@ for (i=0; i< value.length; i++){
         price[i] = (produit.price/100);
         imageUrl[i] = produit.imageUrl;
         _id[i] = produit._id;
-        couleur1[i] = produit.colors;
-        couleur2[i] = produit.colors;
-        couleur3[i] = produit.colors;
-        couleur4[i] = produit.colors;
     });
 
 //Structure HTML pour l'affichage des produits
 structureProduit += `
 <a href="produit.html?${_id[i]}">
     <div class="blocProduit">
-        <div class="photoProduit">
-            <img src="${imageUrl[i]}"/>
-        </div>
+        <h2>${nomProduit[i]}</h2>
+        <div class="photoProduit"><img src="${imageUrl[i]}"/></div>
         <div class="detailProduit">
-            <h2>${nomProduit[i]}</h2>
-            <p>${description[i]}</p>
-            <p>${price[i]}€</p>
+        <p class="price">${price[i]}€</p>
+        <p>${description[i]}</p>
+        <p class="color">Couleurs disponibles:<p>
+  
         </div>
     </div>
 </a>
 `;
+
 
 //injection dans le HTML
 positionElement.innerHTML = structureProduit;
