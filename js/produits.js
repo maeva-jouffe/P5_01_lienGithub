@@ -9,8 +9,6 @@ fetch("http://localhost:3000/api/teddies")
 })
 .then(function(value){
 
-
-
 // Mettre les données dans les variables
 let _id=[]
 let nomProduit=[];
@@ -18,8 +16,6 @@ let description=[];
 let price=[];
 let imageUrl=[];
 let structureProduit = ""
-
-
 
 //Fonction qui affichera les produits dans la page web
 function affichageProduits(value){
@@ -52,7 +48,6 @@ structureProduit += `
     </div>
 </a>
 `;
-
 
 //injection dans le HTML
 positionElement.innerHTML = structureProduit;

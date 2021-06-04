@@ -1,6 +1,5 @@
 //Récupération des données API
 fetch("http://localhost:3000/api/teddies")
-
 .then(function(res){
     if(res.ok){
         let data= res.json();
@@ -9,7 +8,6 @@ fetch("http://localhost:3000/api/teddies")
 })
 .then(function(value){
 
-
 // Mettre les données dans les variables
 let _id=[]
 let nomProduit=[];
@@ -17,7 +15,6 @@ let description=[];
 let price=[];
 let imageUrl=[];
 let structureProduit = ""
-
 
 //Boucle pour afficher tous les objets dans la page
 for (i=0; i< value.length; i++){
@@ -107,25 +104,16 @@ let articleAjoute = JSON.parse(localStorage.getItem("article"));
 window.alert('Votre article à bien été ajouté au panier');
 
 // Si le local storage contient des articles
+
+
 if(articleAjoute){
     articleAjoute.push(produitCommande);
-    localStorage.setItem("article",JSON.stringify(articleAjoute));
-    confirmationPopup();
+    localStorage.setItem("article", JSON.stringify(articleAjoute));
 }
 else{
     articleAjoute = [];
     articleAjoute.push(produitCommande);
-    localStorage.setItem("article",JSON.stringify(articleAjoute));
-    confirmationPopup();
-}
-
-
-
-
-
+    localStorage.setItem("article", JSON.stringify(articleAjoute));
+        }
+    });
 });
-
-
-});
-
-
