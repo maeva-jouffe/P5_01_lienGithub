@@ -58,7 +58,7 @@ const structureProduitSelectionne =`
     </div>
 </div>`;
 
-// Adapterle formulaire au nombre d'options de couleur
+// Adapter le formulaire au nombre d'options de couleur
 const optionCouleurs = selection.colors;
 let structureOptionSelectionne = [];
 
@@ -73,7 +73,7 @@ affichageProduit.innerHTML = structureProduitSelectionne;
 const affichageOptionProduit = document.querySelector("#color");
 affichageOptionProduit.innerHTML = structureOptionSelectionne;
 
-/////////////////////////////////    Panier    /////////////////////////////////////////////////////////
+/////////////////////////////////    Panier    /////////////////////////////////
 
 //récupération de la couleur choisie par l'utilisateur
 const choixOption = document.getElementById('color');
@@ -96,7 +96,32 @@ buttonPanier.addEventListener("click", (e)=>{
             imageUrl: selection.imageUrl,
             couleurs: optionChoisie,
             quantity: 1,
-            }
+            };
+
+/////////////////////////////////    Local Storage    /////////////////////////////////
+
+//Déclaration de la clé 'article' 
+let articleAjoute = JSON.parse(localStorage.getItem("article"));
+
+//Fenêtre popup qui apparait au clic sur 'ajouter au panier'
+window.alert('Votre article à bien été ajouté au panier');
+
+// Si le local storage contient des articles
+if(articleAjoute){
+    articleAjoute.push(produitCommande);
+    localStorage.setItem("article",JSON.stringify(articleAjoute));
+    confirmationPopup();
+}
+else{
+    articleAjoute = [];
+    articleAjoute.push(produitCommande);
+    localStorage.setItem("article",JSON.stringify(articleAjoute));
+    confirmationPopup();
+}
+
+
+
+
 
 });
 
