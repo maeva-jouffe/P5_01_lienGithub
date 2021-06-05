@@ -15,6 +15,7 @@ let nomProduit=[];
 let description=[];
 let price=[];
 let imageUrl=[];
+let color = [];
 let structureProduit = ""
 
 //Fonction qui affichera les produits dans la page web
@@ -31,6 +32,7 @@ for (i=0; i< value.length; i++){
         price[i] = (produit.price/100);
         imageUrl[i] = produit.imageUrl;
         _id[i] = produit._id;
+        color[i] = produit.colors;
     });
 
 //Structure HTML pour l'affichage des produits
@@ -42,8 +44,7 @@ structureProduit += `
         <div class="detailProduit">
         <p class="price">${price[i]}€</p>
         <p>${description[i]}</p>
-        <p class="color">Couleurs disponibles:<p>
-  
+        <p class="color">Couleurs disponibles: ${color[i]}</p>
         </div>
     </div>
 </a>

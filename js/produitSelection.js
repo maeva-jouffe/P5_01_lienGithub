@@ -29,7 +29,6 @@ for (i=0; i< value.length; i++){
 // Paramètres de requête de l'URL pour la page produits
 const queryString_url_id = window.location.search;
 
-
 //Supprimer le '?' de la chaine de caractères récupérée
 const idRecupere = queryString_url_id.slice(1);
 
@@ -48,7 +47,7 @@ const structureProduitSelectionne =`
         <p>${selection.price/100}€</p>
         <form method="post" action="#">
             <label for="color">Choisissez votre couleur</label>
-            <select name="color" id="color">    
+            <select name="color" id="color">  ${selection.colors}  
             </select>
         </form><br>
             <button type="button" class="btn btn-dark" id="panier">Ajouter au panier</button>
@@ -60,7 +59,8 @@ const optionCouleurs = selection.colors;
 let structureOptionSelectionne = [];
 
 for(let c = 0; c < optionCouleurs.length; c++){
-    structureOptionSelectionne +=`<option value="${c}">${optionCouleurs[c]}</option>`;
+    structureOptionSelectionne +=`
+    <option value="${optionCouleurs[c]}">${optionCouleurs[c]}</option>`;
 }
 
 //Selection de la classe qui contiendra le produit et injection dans le HTML 
@@ -115,5 +115,7 @@ else{
     articleAjoute.push(produitCommande);
     localStorage.setItem("article", JSON.stringify(articleAjoute));
         }
+
     });
+    
 });

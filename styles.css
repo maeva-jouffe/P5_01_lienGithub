@@ -119,12 +119,19 @@ td, th{
     padding: 0.5em 1em 0.5em 1em;
 }
 
-
+.fa-trash-alt{
+    color:#f3e9f1;
+    margin-right: 0.5em;
+}
 input{
     width: 20em;
     height: 2.5em;
     margin: 0.5em;
     display: block;
+}
+
+#inputQuantite{
+    width: 3em;
 }
 
 .price{
@@ -145,7 +152,16 @@ input[type=submit]{
 width : 100%;
 padding-left: 2em;
 }
+.container_page_panier img{
+    width:80%;
+}
 
+#produitPanier{
+    border: 1px solid #261624;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    background-color: white;
+}
 footer{
     background-color: #261624;
     height: 6em;
