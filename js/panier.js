@@ -30,7 +30,7 @@ else {
                     <p class="option couleur">${articleAjoute[p].couleurs}</p>
                 </div>
                 <div class="col">
-                    <input type="number" value="1" min="1" id="inputQuantite"/>
+                    <p class="quantite">Quantité:${articleAjoute[p].quantity}<p>
                     <p class="price">${articleAjoute[p].price}€</p>
                 </div>
                 <div class="col">

@@ -135,16 +135,23 @@ input{
     margin: 0.5em;
     display: block;
 }
-
+.quantite{
+    font-size: 1em;
+    margin-top: 2em;
+}
 #inputQuantite{
     width: 3em;
 }
 
 .titre{
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
+    margin-top: 1em;
 }
-
+.info{
+    font-size: 1.5em;
+    font-family: 'comic sans MS', arial;
+}
 .price{
     font-size: 1em;
     font-weight: bold;
@@ -153,9 +160,7 @@ input{
 #supprimer{
     margin-top: 15%;
 }
-.color{
-    font-weight: bold;
-}
+
 input[type=submit]{
     background-color:#261624;
     color: #f3e9f1;

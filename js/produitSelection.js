@@ -44,7 +44,11 @@ const structureProduitSelectionne =`
     <div class="col-5">
         <h2>Ours en peluche "${selection.name}"</h2>
         <p>${selection.description}</p>
-        <p>${selection.price/100}€</p>
+        <p class="price">${selection.price/100}€</p>
+        <form method="post" action="#">
+        <p><label for="quantite">Quantité:</label>
+        <select name="quantite" id="quantite">
+        </select></form></p>
         <form method="post" action="#">
             <label for="color">Choisissez votre couleur</label>
             <select name="color" id="color">  ${selection.colors}  
@@ -70,6 +74,19 @@ affichageProduit.innerHTML = structureProduitSelectionne;
 const affichageOptionProduit = document.querySelector("#color");
 affichageOptionProduit.innerHTML = structureOptionSelectionne;
 
+// Adapter le formulaire au nombre d'options de couleur
+const structureQuantite =`
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+`;
+
+const positionQuantite = document.querySelector("#quantite");
+positionQuantite.innerHTML = structureQuantite;
+
 /////////////////////////////////    Panier    /////////////////////////////////
 
 //récupération de la couleur choisie par l'utilisateur
@@ -84,15 +101,16 @@ buttonPanier.addEventListener("click", (e)=>{
 
     //Mettre le choix dans une variable
     const optionChoisie = choixOption.value;
+    const quantiteChoisie = positionQuantite.value;
 
         //Récupérer les valeurs du choix
         let produitCommande ={
             _id: selection._id,
             nomProduit:selection.name,
-            price: selection.price/100,
             imageUrl: selection.imageUrl,
             couleurs: optionChoisie,
-            quantity: 1,
+            quantity: quantiteChoisie,
+            price: (selection.price*quantiteChoisie)/100
             };
 
 /////////////////////////////////    Local Storage    /////////////////////////////////
