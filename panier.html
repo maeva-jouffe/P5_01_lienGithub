@@ -54,27 +54,19 @@
             <h1>Votre panier</h1>
         </div>
         <section class="container_page_panier">
-     
+            <!--insertion dynamique du code--> 
         </section>
-        
+        <div class="total">
+            <p id="prixTotalPanier"></p>
+        </div>
         <!-- Tableau résumé des produits-->
 
         <!-- Formulaire-->
         <div class="jumbotron">
             <p>Vos informations</p>
         </div>
-        <section>
-            <form method="post" action="#">
-                <fieldset>
-                    <p><label for="firstName">Nom</label><input type="text" name="firstName" id="firstName" required/></p>
-                    <p><label for="lastName">Prénom</label><input type="text" name="lastName" id="lastName" required/></p>
-                    <p><label for="email">Email</label><input type="email" name="email" id="email" required/></p>
-                    <p><label for="address">Adresse</label><input type="text" name="address" id="address" required/></p>
-                    <p><label for="codePostal">Code postal</label><input type="text" name="codePostal" id="codePostal" maxlength="5" minlength="5" required/></p>
-                    <p><label for="city">Ville</label><input type="text" name="city" id="city" required/></p>
-                    <input type="submit" value="Acheter"/>
-                </fieldset>
-            </form>
+        <section id="formulaire">
+            <!--Insertion dynamique du formulaire-->
         </section>
         <!-- Formulaire-->
 

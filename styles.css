@@ -123,6 +123,12 @@ td, th{
     color:#f3e9f1;
     margin-right: 0.5em;
 }
+
+.total{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
 input{
     width: 20em;
     height: 2.5em;
@@ -134,12 +140,19 @@ input{
     width: 3em;
 }
 
+.titre{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 .price{
-    font-size: 1.3em;
+    font-size: 1em;
     font-weight: bold;
     margin-top: 1em;
 }
-
+#supprimer{
+    margin-top: 15%;
+}
 .color{
     font-weight: bold;
 }
@@ -154,6 +167,7 @@ padding-left: 2em;
 }
 .container_page_panier img{
     width:80%;
+    border-radius: 100%;
 }
 
 #produitPanier{
