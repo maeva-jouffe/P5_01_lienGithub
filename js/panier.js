@@ -14,7 +14,6 @@ if (articleAjoute === null || articleAjoute == 0) {
         <img src="images/panier.png" alt="Panier vide"/>
     </div>`
     panier.innerHTML = panierVide;
-    console.log("ok");
 }
 else {
     let panierPlein = [];
@@ -85,7 +84,6 @@ const structureFormulaire = `
                     <p><label for="lastName">Prénom</label><input type="text" name="lastName" id="lastName" required/></p>
                     <p><label for="email">Email</label><input type="email" name="email" id="email" required/></p>
                     <p><label for="address">Adresse</label><input type="text" name="address" id="address" required/></p>
-                    <p><label for="codePostal">Code postal</label><input type="text" name="codePostal" id="codePostal" maxlength="5" minlength="5" required/></p>
                     <p><label for="city">Ville</label><input type="text" name="city" id="city" required/></p>
                     <input type="submit" value="Acheter" id="valider"/>
                 </fieldset>
@@ -101,10 +99,9 @@ buttonFormulaire.addEventListener("click", (e) => {
     const contact = {
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
-        email: document.getElementById("email").value,
         address: document.getElementById("address").value,
-        codePostal: document.getElementById("codePostal").value,
-        city: document.getElementById("city").value
+        city: document.getElementById("city").value,
+        email: document.getElementById("email").value   
     }
 
     //Validation des données du formulaire avant envoi dans le loca storage
@@ -138,16 +135,6 @@ buttonFormulaire.addEventListener("click", (e) => {
         };
     }
 
-    function controlCodePostal() {
-        const cP = contact.codePostal;
-        if (/^[0-9]{5}$/.test(cP)) {
-            return true;
-        } else {
-            alert("Veuillez renseigner correctement votre code postal \nLes lettres et symboles ne sont pas autorisés \nVotre code postal doit contenir 5 caractères")
-            return false;
-        };
-    }
-
     function controlemail() {
         const email = contact.email;
         if (/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
@@ -169,18 +156,36 @@ buttonFormulaire.addEventListener("click", (e) => {
     }
 
     // Mettre valeursFormulaires dans le localStorage
-    if (controlPrenom() && controlNom() && controlVille() && controlCodePostal() && controlemail() && controlAddress() ==true) {
+    if (controlPrenom() && controlNom() && controlVille() && controlemail() && controlAddress() ==true) {
         localStorage.setItem("contact", JSON.stringify(contact));
-        console.log("okok");
     } else {
 
     }
 
+    const order = {articleAjoute,contact};
 
-    const envoiDuFormulaire = {
-        articleAjoute,
-        formulaire
-    }
+    const envoiOrder = fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        headers: { 
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json' 
+    },
+        body: JSON.stringify(order)
+        
+    });
+    console.log(envoiOrder);
 
+  
+    
+    // const envoiOrder = fetch("http://localhost:3000/api/teddies", {
+    //     method: "POST",
+    //     headers: { 
+    // 'Accept': 'application/json', 
+    // 'Content-Type': 'application/json' 
+    // },
+    //     body: JSON.stringify(order)
+        
+    // });
+    // console.log(envoiOrder);
 })
 
