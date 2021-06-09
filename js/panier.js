@@ -161,31 +161,26 @@ buttonFormulaire.addEventListener("click", (e) => {
     } else {
 
     }
-
-    const order = {articleAjoute,contact};
-
-    const envoiOrder = fetch("http://localhost:3000/api/teddies/order", {
+    //Récupérer la valeur de _id contenue dans le local storage et la mettre dans un tableau
+    let products= [];
+    for (p=0; p< articleAjoute.length; p++){
+        articleAjoute.forEach((produit, p)=>{
+            products[p] = produit._id;
+        })};
+    
+    //Créer un objet 'order' contenant le tableau des id et un objet des contacts
+    const order = {products, contact};
+  
+    //Envoyer la requete POST à l'API
+    fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
         headers: { 
         'Accept': 'application/json', 
         'Content-Type': 'application/json' 
     },
-        body: JSON.stringify(order)
-        
-    });
-    console.log(envoiOrder);
+        body: JSON.stringify(order) 
+    }); 
 
-  
     
-    // const envoiOrder = fetch("http://localhost:3000/api/teddies", {
-    //     method: "POST",
-    //     headers: { 
-    // 'Accept': 'application/json', 
-    // 'Content-Type': 'application/json' 
-    // },
-    //     body: JSON.stringify(order)
-        
-    // });
-    // console.log(envoiOrder);
 })
 

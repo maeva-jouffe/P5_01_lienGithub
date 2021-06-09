@@ -8,24 +8,9 @@ fetch("http://localhost:3000/api/teddies")
 })
 .then(function(value){
 
-// Mettre les données dans les variables
-let _id=[]
-let nomProduit=[];
-let description=[];
-let price=[];
-let imageUrl=[];
-let structureProduit = ""
-
 //Boucle pour afficher tous les objets dans la page
-for (i=0; i< value.length; i++){
-    value.forEach((produit, i)=>{
-        nomProduit[i] = produit.name;
-        description[i] = produit.description;
-        price[i] = (produit.price/100);
-        imageUrl[i] = produit.imageUrl;
-        _id[i] = produit._id;
-     })}; 
-
+for (produit of value) {
+  
 // Paramètres de requête de l'URL pour la page produits
 const queryString_url_id = window.location.search;
 
@@ -87,6 +72,7 @@ const structureQuantite =`
 const positionQuantite = document.querySelector("#quantite");
 positionQuantite.innerHTML = structureQuantite;
 
+
 /////////////////////////////////    Panier    /////////////////////////////////
 
 //récupération de la couleur choisie par l'utilisateur
@@ -123,7 +109,6 @@ window.alert('Votre article à bien été ajouté au panier');
 
 // Si le local storage contient des articles
 
-
 if(articleAjoute){
     articleAjoute.push(produitCommande);
     localStorage.setItem("article", JSON.stringify(articleAjoute));
@@ -133,7 +118,6 @@ else{
     articleAjoute.push(produitCommande);
     localStorage.setItem("article", JSON.stringify(articleAjoute));
         }
-
     });
-    
+}
 });
