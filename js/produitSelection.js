@@ -108,7 +108,6 @@ let articleAjoute = JSON.parse(localStorage.getItem("article"));
 window.alert('Votre article à bien été ajouté au panier');
 
 // Si le local storage contient des articles
-
 if(articleAjoute){
     articleAjoute.push(produitCommande);
     localStorage.setItem("article", JSON.stringify(articleAjoute));

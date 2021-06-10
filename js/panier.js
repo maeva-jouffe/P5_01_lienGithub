@@ -1,4 +1,5 @@
 
+
 //Rappel de la déclaration de la clé 'article' 
 let articleAjoute = JSON.parse(localStorage.getItem("article"));
 
@@ -85,13 +86,13 @@ const structureFormulaire = `
                     <p><label for="email">Email</label><input type="email" name="email" id="email" required/></p>
                     <p><label for="address">Adresse</label><input type="text" name="address" id="address" required/></p>
                     <p><label for="city">Ville</label><input type="text" name="city" id="city" required/></p>
-                    <input type="submit" value="Acheter" id="valider"/>
+                    <input type="submit" value="Acheter" id="acheter"/>
                 </fieldset>
             </form>`;
 formulairePosition.innerHTML = structureFormulaire;
 
 // Selection et écoute du bouton
-const buttonFormulaire = document.getElementById("valider");
+const buttonFormulaire = document.getElementById("acheter");
 buttonFormulaire.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -158,6 +159,7 @@ buttonFormulaire.addEventListener("click", (e) => {
     // Mettre valeursFormulaires dans le localStorage
     if (controlPrenom() && controlNom() && controlVille() && controlemail() && controlAddress() ==true) {
         localStorage.setItem("contact", JSON.stringify(contact));
+        localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
     } else {
 
     }
@@ -172,15 +174,46 @@ buttonFormulaire.addEventListener("click", (e) => {
     const order = {products, contact};
   
     //Envoyer la requete POST à l'API
-    fetch("http://localhost:3000/api/teddies/order", {
-        method: "POST",
-        headers: { 
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json' 
-    },
-        body: JSON.stringify(order) 
-    }); 
-
+    function envoiVersServeur(){
+        const envoi =  fetch("http://localhost:3000/api/teddies/order", {
+            method: "POST",
+            headers: { 
+            'Accept': 'application/json', 
+            'Content-Type': 'application/json' 
+        },
+            body: JSON.stringify(order) 
+        }); 
     
+    envoi.then(async(response)=>{
+         try{
+             const contenu = await response.json();
+             console.log("contenu de reponse");
+             console.log(contenu);
+
+             if(response.ok){
+                 console.log(`résultat de réponse.ok: ${response.ok}`);
+
+                 //Récupérer l'id de la réponse 
+                 console.log("id de réponse");
+                 console.log(contenu.orderId);
+                 //Le mettre dans le local storage
+                 localStorage.setItem("id",contenu.orderId);
+                 //Renvoi vers la page de confirmation
+                 window.location = "confirmation.html";
+
+             }else{
+                console.log(`résultat du serveur: ${response.status}`);
+                alert(`problème avec le serveur: erreur ${reponse.status}`)
+             };
+         }catch(e){
+             console.log("erreur qui vient du catch()");
+             console.log(e);
+             alert(`erreur qui vient du catch() ${e}`);
+         }
+    });
+    }
+    envoiVersServeur();
 })
+/////////////////////////////////    Confirmation  /////////////////////////////////
+
 

@@ -55,6 +55,5 @@ positionElement.innerHTML = structureProduit;
 }
 }
 affichageProduits(value);
-
 });
 
