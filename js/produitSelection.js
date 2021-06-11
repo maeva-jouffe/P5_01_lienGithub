@@ -6,10 +6,10 @@ fetch("http://localhost:3000/api/teddies")
         return data;
     }
 })
-.then(function(value){
+.then(function(listeDeProduits){
 
 //Boucle pour afficher tous les objets dans la page
-for (produit of value) {
+for (produit of listeDeProduits) {
   
 // Paramètres de requête de l'URL pour la page produits
 const queryString_url_id = window.location.search;
@@ -18,7 +18,7 @@ const queryString_url_id = window.location.search;
 const idRecupere = queryString_url_id.slice(1);
 
 //Affichage du produit cliqué dans la page produit
-const selection = value.find (element => element._id === idRecupere);
+const selection = listeDeProduits.find (element => element._id === idRecupere);
 
 //Structure HTML pour l'affichage du produit selectionné
 const structureProduitSelectionne =`
@@ -47,9 +47,9 @@ const structureProduitSelectionne =`
 const optionCouleurs = selection.colors;
 let structureOptionSelectionne = [];
 
-for(let c = 0; c < optionCouleurs.length; c++){
+for(couleur of optionCouleurs){
     structureOptionSelectionne +=`
-    <option value="${optionCouleurs[c]}">${optionCouleurs[c]}</option>`;
+    <option value="${couleur}">${couleur}</option>`;
 }
 
 //Selection de la classe qui contiendra le produit et injection dans le HTML 
@@ -108,6 +108,7 @@ let articleAjoute = JSON.parse(localStorage.getItem("article"));
 window.alert('Votre article à bien été ajouté au panier');
 
 // Si le local storage contient des articles
+
 if(articleAjoute){
     articleAjoute.push(produitCommande);
     localStorage.setItem("article", JSON.stringify(articleAjoute));

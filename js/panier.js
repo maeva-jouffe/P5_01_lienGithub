@@ -1,13 +1,11 @@
-
-
 //Rappel de la déclaration de la clé 'article' 
-let articleAjoute = JSON.parse(localStorage.getItem("article"));
+let articleAjouteAuPanier = JSON.parse(localStorage.getItem("article"));
 
 //Selection de la classe qui contiendra le produit et injection dans le HTML 
 const panier = document.querySelector(".container_page_panier");
 
 //Quand le panier est vide
-if (articleAjoute === null || articleAjoute == 0) {
+if (articleAjouteAuPanier === null || articleAjouteAuPanier == 0) {
     const panierVide = `
     <div>
         <p class="panierVide">Votre panier Orinours est vide</p>
@@ -18,20 +16,20 @@ if (articleAjoute === null || articleAjoute == 0) {
 }
 else {
     let panierPlein = [];
-    for (p = 0; p < articleAjoute.length; p++) {
+    for (resumeArticle of articleAjouteAuPanier) {
         panierPlein += `
         <div class="container" id="produitPanier">
             <div class="row">
                 <div class="col">
-                    <img src="${articleAjoute[p].imageUrl}"/>
+                    <img src="${resumeArticle.imageUrl}"/>
                 </div>
                 <div class="col">
-                    <p class="titre">${articleAjoute[p].nomProduit}</p>
-                    <p class="option couleur">${articleAjoute[p].couleurs}</p>
+                    <p class="titre">${resumeArticle.nomProduit}</p>
+                    <p class="option couleur">${resumeArticle.couleurs}</p>
                 </div>
                 <div class="col">
-                    <p class="quantite">Quantité:${articleAjoute[p].quantity}<p>
-                    <p class="price">${articleAjoute[p].price}€</p>
+                    <p class="quantite">Quantité:${resumeArticle.quantity}<p>
+                    <p class="price">${resumeArticle.price}€</p>
                 </div>
                 <div class="col">
                 <button type="button" class="btn btn-dark" id="supprimer"><i class="far fa-trash-alt"></i>Supprimer</button>
@@ -40,56 +38,74 @@ else {
         </div>`;
         panier.innerHTML = panierPlein;
     }
+    /////////////////////////////////    Total panier  /////////////////////////////////
+
+    function additionnerLesPrix(){
+        //Boucle pour récupérer le prix de chaque article
+        let totalPanier = [];
+        for (articleDuPanier of articleAjouteAuPanier) {
+            let prixPanier = articleDuPanier.price;
+            totalPanier.push(prixPanier);
+        }
+        //Additionner les prix
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        const prixTotal = totalPanier.reduce(reducer);
+        
+        //Afficher le total dans le HTML
+        const affichagePrix = document.getElementById("prixTotalPanier");
+        affichagePrix.innerHTML = "Total du panier : " + prixTotal + "€";
+        
+        //Envoyer le prix total dans le local storage
+        localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+    }
+    additionnerLesPrix();
 };
 
 /////////////////////////////////    Bouton 'supprimer'   /////////////////////////////////
-let boutonSupprimer = document.querySelectorAll("#supprimer");
 
-for (let s = 0; s < boutonSupprimer.length; s++) {
+function boutonSupprimerArticle(){
+    let boutonSupprimer = document.querySelectorAll("#supprimer");
 
-    boutonSupprimer[s].addEventListener("click", (e) => {
-        e.preventDefault();
-
-        // Selectionner l'Id qui sera supprimé au clic sur le bouton 'supprimer'
-        let idSupprime = articleAjoute[s]._id;
-        // Fonction filter pour supprimer l'id 
-        articleAjoute = articleAjoute.filter(elem => elem._id !== idSupprime);
-        // Envoyer l'info dans le local Storage
-        localStorage.setItem("article", JSON.stringify(articleAjoute));
-        document.location.reload();
-    })
-};
-
-/////////////////////////////////    Total panier  /////////////////////////////////
-let totalPanier = [];
-for (let t = 0; t < articleAjoute.length; t++) {
-    let prixPanier = articleAjoute[t].price;
-    totalPanier.push(prixPanier);
+    //Récuperer le bouton supprimer de chaque article dans le panier
+    for (let s = 0; s < boutonSupprimer.length; s++) {
+    
+        //Ecouter le click sur le bouton supprimer
+        boutonSupprimer[s].addEventListener("click", (e) => {
+            e.preventDefault();
+    
+            // Selectionner l'Id qui sera supprimé au clic sur le bouton 'supprimer'
+            let idSupprime = resumeArticle._id;
+    
+            // Fonction filter pour supprimer l'id 
+            articleAjouteAuPanier = articleAjouteAuPanier.filter(elem => elem._id !== idSupprime);
+            
+            // Envoyer l'info dans le local Storage
+            localStorage.setItem("article", JSON.stringify(articleAjouteAuPanier));
+            document.location.reload();
+        })
+    };
 }
-//Additionner les prix
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-const prixTotal = totalPanier.reduce(reducer);
-
-//Afficher le total dans le HTML
-const affichagePrix = document.getElementById("prixTotalPanier");
-affichagePrix.innerHTML = "Total du panier : " + prixTotal + "€";
+boutonSupprimerArticle();
 
 /////////////////////////////////    Formulaire  /////////////////////////////////
 
 //Insertion dans le HTML
-const formulairePosition = document.getElementById("formulaire");
-const structureFormulaire = `
-    <form method="post" action="#">
-                <fieldset>
-                    <p><label for="firstName">Nom</label><input type="text" name="firstName" id="firstName" required/></p>
-                    <p><label for="lastName">Prénom</label><input type="text" name="lastName" id="lastName" required/></p>
-                    <p><label for="email">Email</label><input type="email" name="email" id="email" required/></p>
-                    <p><label for="address">Adresse</label><input type="text" name="address" id="address" required/></p>
-                    <p><label for="city">Ville</label><input type="text" name="city" id="city" required/></p>
-                    <input type="submit" value="Acheter" id="acheter"/>
-                </fieldset>
-            </form>`;
-formulairePosition.innerHTML = structureFormulaire;
+function insertionFormulaireDansHtml(){
+    const formulairePosition = document.getElementById("formulaire");
+    const structureFormulaire = `
+        <form method="post" action="#">
+                    <fieldset>
+                        <p><label for="firstName">Nom</label><input type="text" name="firstName" id="firstName" required/></p>
+                        <p><label for="lastName">Prénom</label><input type="text" name="lastName" id="lastName" required/></p>
+                        <p><label for="email">Email</label><input type="email" name="email" id="email" required/></p>
+                        <p><label for="address">Adresse</label><input type="text" name="address" id="address" required/></p>
+                        <p><label for="city">Ville</label><input type="text" name="city" id="city" required/></p>
+                        <input type="submit" value="Acheter" id="acheter"/>
+                    </fieldset>
+                </form>`;
+    formulairePosition.innerHTML = structureFormulaire;
+}
+insertionFormulaireDansHtml();
 
 // Selection et écoute du bouton
 const buttonFormulaire = document.getElementById("acheter");
@@ -159,14 +175,14 @@ buttonFormulaire.addEventListener("click", (e) => {
     // Mettre valeursFormulaires dans le localStorage
     if (controlPrenom() && controlNom() && controlVille() && controlemail() && controlAddress() ==true) {
         localStorage.setItem("contact", JSON.stringify(contact));
-        localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+        
     } else {
-
+        alert("Une erreur est survenue");
     }
     //Récupérer la valeur de _id contenue dans le local storage et la mettre dans un tableau
     let products= [];
-    for (p=0; p< articleAjoute.length; p++){
-        articleAjoute.forEach((produit, p)=>{
+    for (p=0; p< articleAjouteAuPanier.length; p++){
+        articleAjouteAuPanier.forEach((produit, p)=>{
             products[p] = produit._id;
         })};
     

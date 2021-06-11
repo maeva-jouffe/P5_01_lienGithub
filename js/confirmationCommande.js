@@ -5,8 +5,10 @@ console.log(`${prixTotal}`);
 
 //Récupération du prix total du panier
 const structureConfirmation =
-    `<p>Identifiant de commande:<br>${id}</p>
-    <p>Montant total de la commande:<br>${prixTotal}€</p>`;
+    `<p>Votre commande numéro
+    <em class="idDeCommande"> ${id}  </em> à bien été enregistrée</p>
+    <p>Montant total de la commande: <em class="prixTotalCommande">${prixTotal}€</em></p>
+    `;
 
 const positionConfirmation = document.getElementById("identifiantCommande");
 console.log(positionConfirmation);
