@@ -74,7 +74,7 @@ function boutonSupprimerArticle(){
             e.preventDefault();
     
             // Selectionner l'Id qui sera supprimé au clic sur le bouton 'supprimer'
-            let idSupprime = resumeArticle._id;
+            let idSupprime = articleAjouteAuPanier[s]._id;
     
             // Fonction filter pour supprimer l'id 
             articleAjouteAuPanier = articleAjouteAuPanier.filter(elem => elem._id !== idSupprime);
