@@ -37,8 +37,8 @@ structureProduit += `
 
 //injection dans le HTML
 positionElement.innerHTML = structureProduit;
-
 }
+
 affichageProduits(listeDeProduits);
 });
 

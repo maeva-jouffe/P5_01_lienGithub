@@ -1,7 +1,6 @@
-// Récupération de l'id dela réponse serveur
+// Récupération de l'id de la réponse serveur
 const id = localStorage.getItem("id");
 const prixTotal = localStorage.getItem("prixTotal");
-console.log(`${prixTotal}`);
 
 //Récupération du prix total du panier
 const structureConfirmation =
@@ -11,5 +10,5 @@ const structureConfirmation =
     `;
 
 const positionConfirmation = document.getElementById("identifiantCommande");
-console.log(positionConfirmation);
+
 const affichageConfirmation = positionConfirmation.innerHTML = structureConfirmation;

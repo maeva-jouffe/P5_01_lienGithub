@@ -98,7 +98,7 @@ buttonPanier.addEventListener("click", (e)=>{
             quantity: quantiteChoisie,
             price: (selection.price*quantiteChoisie)/100
             };
-
+          
 /////////////////////////////////    Local Storage    /////////////////////////////////
 
 //Déclaration de la clé 'article' 

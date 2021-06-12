@@ -121,7 +121,7 @@ buttonFormulaire.addEventListener("click", (e) => {
         email: document.getElementById("email").value   
     }
 
-    //Validation des données du formulaire avant envoi dans le loca storage
+    //Validation des données du formulaire avant envoi dans le local storage
     function controlPrenom() {
         const prenom = contact.lastName;
         if (/^[A-Za-z]{2,25}$/.test(prenom)) {
@@ -197,33 +197,22 @@ buttonFormulaire.addEventListener("click", (e) => {
             'Accept': 'application/json', 
             'Content-Type': 'application/json' 
         },
-            body: JSON.stringify(order) 
+            body: JSON.stringify(order)  
         }); 
-    
+
     envoi.then(async(response)=>{
          try{
              const contenu = await response.json();
-             console.log("contenu de reponse");
-             console.log(contenu);
 
              if(response.ok){
-                 console.log(`résultat de réponse.ok: ${response.ok}`);
-
-                 //Récupérer l'id de la réponse 
-                 console.log("id de réponse");
-                 console.log(contenu.orderId);
-                 //Le mettre dans le local storage
                  localStorage.setItem("id",contenu.orderId);
                  //Renvoi vers la page de confirmation
                  window.location = "confirmation.html";
 
              }else{
-                console.log(`résultat du serveur: ${response.status}`);
                 alert(`problème avec le serveur: erreur ${reponse.status}`)
              };
          }catch(e){
-             console.log("erreur qui vient du catch()");
-             console.log(e);
              alert(`erreur qui vient du catch() ${e}`);
          }
     });
