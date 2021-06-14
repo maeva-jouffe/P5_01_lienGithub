@@ -15,7 +15,7 @@ if (articleAjouteAuPanier === null || articleAjouteAuPanier == 0) {
     panier.innerHTML = panierVide;
 }
 else {
-    let panierPlein = [];
+    let panierPlein = "";
     for (resumeArticle of articleAjouteAuPanier) {
         panierPlein += `
         <div class="container" id="produitPanier">
@@ -36,8 +36,8 @@ else {
                 </div>
             </div>
         </div>`;
-        panier.innerHTML = panierPlein;
     }
+    panier.innerHTML = panierPlein;
     /////////////////////////////////    Total panier  /////////////////////////////////
 
     function additionnerLesPrix(){
@@ -175,50 +175,51 @@ buttonFormulaire.addEventListener("click", (e) => {
     // Mettre valeursFormulaires dans le localStorage
     if (controlPrenom() && controlNom() && controlVille() && controlemail() && controlAddress() ==true) {
         localStorage.setItem("contact", JSON.stringify(contact));
-        
-    } else {
-        alert("Une erreur est survenue");
-    }
-    //Récupérer la valeur de _id contenue dans le local storage et la mettre dans un tableau
-    let products= [];
-    for (p=0; p< articleAjouteAuPanier.length; p++){
+          //Récupérer la valeur de _id contenue dans le local storage et la mettre dans un tableau
+        let products= [];
+        for (p=0; p< articleAjouteAuPanier.length; p++){
         articleAjouteAuPanier.forEach((produit, p)=>{
             products[p] = produit._id;
         })};
     
     //Créer un objet 'order' contenant le tableau des id et un objet des contacts
     const order = {products, contact};
+        envoiVersServeur(order);
+    } else {
+        alert("Une erreur est survenue");
+    }
+  
   
     //Envoyer la requete POST à l'API
-    function envoiVersServeur(){
-        const envoi =  fetch("http://localhost:3000/api/teddies/order", {
-            method: "POST",
-            headers: { 
-            'Accept': 'application/json', 
-            'Content-Type': 'application/json' 
-        },
-            body: JSON.stringify(order)  
-        }); 
-
-    envoi.then(async(response)=>{
-         try{
-             const contenu = await response.json();
-
-             if(response.ok){
-                 localStorage.setItem("id",contenu.orderId);
-                 //Renvoi vers la page de confirmation
-                 window.location = "confirmation.html";
-
-             }else{
-                alert(`problème avec le serveur: erreur ${reponse.status}`)
-             };
-         }catch(e){
-             alert(`erreur qui vient du catch() ${e}`);
-         }
-    });
-    }
-    envoiVersServeur();
+    
 })
 /////////////////////////////////    Confirmation  /////////////////////////////////
 
 
+function envoiVersServeur(order){
+    const envoi =  fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        headers: { 
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json' 
+    },
+        body: JSON.stringify(order)  
+    }); 
+
+envoi.then(async(response)=>{
+     try{
+         const contenu = await response.json();
+
+         if(response.ok){
+             localStorage.setItem("id",contenu.orderId);
+             //Renvoi vers la page de confirmation
+             window.location = "confirmation.html";
+
+         }else{
+            alert(`problème avec le serveur: erreur ${reponse.status}`)
+         };
+     }catch(e){
+         alert(`erreur qui vient du catch() ${e}`);
+     }
+});
+}

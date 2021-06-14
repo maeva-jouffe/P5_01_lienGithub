@@ -18,7 +18,7 @@ function affichageProduits(listeDeProduits){
 const positionElement=document.querySelector(".container-produits");
 
 //Boucle pour afficher tous les objets dans la page
-for (produit of listeDeProduits)
+for (produit of listeDeProduits){
 
 //Structure HTML pour l'affichage des produits
 structureProduit += `
@@ -33,10 +33,11 @@ structureProduit += `
         </div>
     </div>
 </a>
-`;
+`;}
 
 //injection dans le HTML
 positionElement.innerHTML = structureProduit;
+
 }
 
 affichageProduits(listeDeProduits);
