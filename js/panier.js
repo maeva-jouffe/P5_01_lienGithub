@@ -1,20 +1,4 @@
-//Rappel de la déclaration de la clé 'article' 
-let articleAjouteAuPanier = JSON.parse(localStorage.getItem("article"));
-
-//Selection de la classe qui contiendra le produit et injection dans le HTML 
-const panier = document.querySelector(".container_page_panier");
-
-//Quand le panier est vide
-if (articleAjouteAuPanier === null || articleAjouteAuPanier == 0) {
-    const panierVide = `
-    <div>
-        <p class="panierVide">Votre panier Orinours est vide</p>
-        <p>Et si vous faisiez un tour dans notre catalogue?</p>
-        <img src="images/panier.png" alt="Panier vide"/>
-    </div>`
-    panier.innerHTML = panierVide;
-}
-else {
+function lePanierEstPlein(articleAjouteAuPanier){
     let panierPlein = "";
     for (resumeArticle of articleAjouteAuPanier) {
         panierPlein += `
@@ -35,34 +19,37 @@ else {
                 <button type="button" class="btn btn-dark" id="supprimer"><i class="far fa-trash-alt"></i>Supprimer</button>
                 </div>
             </div>
-        </div>`;
+        </div>`;}
+        return panierPlein;
+    
+}
+function lePanierEstVide(articleAjouteAuPanier){
+    const panierVide = `
+    <div>
+        <p class="panierVide">Votre panier Orinours est vide</p>
+        <p>Et si vous faisiez un tour dans notre catalogue?</p>
+        <img src="images/panier.png" alt="Panier vide"/>
+    </div>`;
+    return panierVide;
+}
+function additionnerLesPrix(){
+    //Boucle pour récupérer le prix de chaque article
+    let totalPanier = [];
+    for (articleDuPanier of articleAjouteAuPanier) {
+        let prixPanier = articleDuPanier.price;
+        totalPanier.push(prixPanier);
     }
-    panier.innerHTML = panierPlein;
-    /////////////////////////////////    Total panier  /////////////////////////////////
-
-    function additionnerLesPrix(){
-        //Boucle pour récupérer le prix de chaque article
-        let totalPanier = [];
-        for (articleDuPanier of articleAjouteAuPanier) {
-            let prixPanier = articleDuPanier.price;
-            totalPanier.push(prixPanier);
-        }
-        //Additionner les prix
-        const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        const prixTotal = totalPanier.reduce(reducer);
-        
-        //Afficher le total dans le HTML
-        const affichagePrix = document.getElementById("prixTotalPanier");
-        affichagePrix.innerHTML = "Total du panier : " + prixTotal + "€";
-        
-        //Envoyer le prix total dans le local storage
-        localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
-    }
-    additionnerLesPrix();
-};
-
-/////////////////////////////////    Bouton 'supprimer'   /////////////////////////////////
-
+    //Additionner les prix
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const prixTotal = totalPanier.reduce(reducer);
+    
+    //Afficher le total dans le HTML
+    const affichagePrix = document.getElementById("prixTotalPanier");
+    affichagePrix.innerHTML = "Total du panier : " + prixTotal + "€";
+    
+    //Envoyer le prix total dans le local storage
+    localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+}
 function boutonSupprimerArticle(){
     let boutonSupprimer = document.querySelectorAll("#supprimer");
 
@@ -85,11 +72,6 @@ function boutonSupprimerArticle(){
         })
     };
 }
-boutonSupprimerArticle();
-
-/////////////////////////////////    Formulaire  /////////////////////////////////
-
-//Insertion dans le HTML
 function insertionFormulaireDansHtml(){
     const formulairePosition = document.getElementById("formulaire");
     const structureFormulaire = `
@@ -105,6 +87,37 @@ function insertionFormulaireDansHtml(){
                 </form>`;
     formulairePosition.innerHTML = structureFormulaire;
 }
+////////////////////    Rappel de la déclaration de la clé 'article'  ////////////////////
+let articleAjouteAuPanier = JSON.parse(localStorage.getItem("article"));
+
+//Selection de la classe qui contiendra le produit ajouté au panier et injection dans le HTML 
+const panier = document.querySelector(".container_page_panier");
+
+
+//Quand le panier est vide
+if (articleAjouteAuPanier === null || articleAjouteAuPanier == 0) {
+    const panierEstVide = lePanierEstVide(articleAjouteAuPanier);
+    panier.innerHTML = panierEstVide;
+}
+//Quand le panier est plein
+else {
+    const remplirPanier = lePanierEstPlein(articleAjouteAuPanier);
+    panier.innerHTML = remplirPanier;
+
+
+    /////////////////////////////////    Total panier  /////////////////////////////////
+
+    additionnerLesPrix();
+};
+
+/////////////////////////////////    Bouton 'supprimer'   /////////////////////////////////
+
+
+boutonSupprimerArticle();
+
+/////////////////////////////////    Formulaire  /////////////////////////////////
+
+//Insertion dans le HTML
 insertionFormulaireDansHtml();
 
 // Selection et écoute du bouton
@@ -190,12 +203,12 @@ buttonFormulaire.addEventListener("click", (e) => {
     }
   
   
-    //Envoyer la requete POST à l'API
+   
     
 })
 /////////////////////////////////    Confirmation  /////////////////////////////////
 
-
+ //Envoyer la requete POST à l'API
 function envoiVersServeur(order){
     const envoi =  fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
