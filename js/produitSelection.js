@@ -10,13 +10,13 @@ function recupererIdDeLarticle(listeDeProduits){
 
     //Affichage du produit cliqué dans la page produit
     const id = listeDeProduits.find (element => element._id === idRecupere);
-return id;
-}
+    return id;
+    }
 }
 function genererHtmlProduitSelectionne(listeDeProduits){
     //Récupérer les valeurs de l'id du produit sur lequel l'utilisateur a cliqué
     const produitSelectionne = recupererIdDeLarticle(listeDeProduits)
-
+    
     //Declaration de la variable pour la structure
     let structureProduitSelectionne ="";
 
@@ -65,7 +65,6 @@ function genererHtmlPourOptionsCouleur(listeDeProduits){
     }
     return structureOptionSelectionne   
 }
-
 
 //Récupération des données API
 fetch("http://localhost:3000/api/teddies")
@@ -139,4 +138,7 @@ fetch("http://localhost:3000/api/teddies")
         localStorage.setItem("article", JSON.stringify(articleAjoute));
             }
         });
+    })
+    .catch(function(err){
+        alert('Une erreur est survenue')
     });

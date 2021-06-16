@@ -18,6 +18,7 @@ function genererHtml(listeDeProduits){
             </a>
             `};
     return structureProduit;
+    
 }
 function affichageProduits(listeDeProduits){
     //Selection de la classe qui contiendra les produits
@@ -39,4 +40,7 @@ fetch("http://localhost:3000/api/teddies")
     .then(function(listeDeProduits){
 
         affichageProduits(listeDeProduits);
-});
+})
+    .catch(function(err){
+        alert('Une erreur est survenue')
+    });

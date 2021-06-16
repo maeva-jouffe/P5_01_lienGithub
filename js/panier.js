@@ -21,7 +21,6 @@ function lePanierEstPlein(articleAjouteAuPanier){
             </div>
         </div>`;}
         return panierPlein;
-    
 }
 function lePanierEstVide(articleAjouteAuPanier){
     const panierVide = `
@@ -46,7 +45,6 @@ function additionnerLesPrix(){
     //Afficher le total dans le HTML
     const affichagePrix = document.getElementById("prixTotalPanier");
     affichagePrix.innerHTML = "Total du panier : " + prixTotal + "€";
-    
     //Envoyer le prix total dans le local storage
     localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
 }
@@ -87,23 +85,48 @@ function insertionFormulaireDansHtml(){
                 </form>`;
     formulairePosition.innerHTML = structureFormulaire;
 }
+function envoiVersServeur(order){
+    const envoi =  fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        headers: { 
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json' 
+    },
+        body: JSON.stringify(order)  
+    }); 
+
+envoi.then(async(response)=>{
+     try{
+         const contenu = await response.json();
+
+         if(response.ok){
+             localStorage.setItem("id",contenu.orderId);
+             //Renvoi vers la page de confirmation
+             window.location = "confirmation.html";
+
+         }else{
+            alert(`problème avec le serveur: erreur ${reponse.status}`)
+         };
+        }catch(err){
+            alert(`erreur qui vient du catch`);
+        }
+});
+}
 ////////////////////    Rappel de la déclaration de la clé 'article'  ////////////////////
 let articleAjouteAuPanier = JSON.parse(localStorage.getItem("article"));
 
 //Selection de la classe qui contiendra le produit ajouté au panier et injection dans le HTML 
 const panier = document.querySelector(".container_page_panier");
 
-
-//Quand le panier est vide
+//Si le panier est vide
 if (articleAjouteAuPanier === null || articleAjouteAuPanier == 0) {
     const panierEstVide = lePanierEstVide(articleAjouteAuPanier);
     panier.innerHTML = panierEstVide;
 }
-//Quand le panier est plein
+//Si il contient un ou plusieurs articles
 else {
     const remplirPanier = lePanierEstPlein(articleAjouteAuPanier);
     panier.innerHTML = remplirPanier;
-
 
     /////////////////////////////////    Total panier  /////////////////////////////////
 
@@ -200,39 +223,10 @@ buttonFormulaire.addEventListener("click", (e) => {
         envoiVersServeur(order);
     } else {
         alert("Une erreur est survenue");
-    }
-  
-  
-   
-    
+    }   
 })
+
 /////////////////////////////////    Confirmation  /////////////////////////////////
 
- //Envoyer la requete POST à l'API
-function envoiVersServeur(order){
-    const envoi =  fetch("http://localhost:3000/api/teddies/order", {
-        method: "POST",
-        headers: { 
-        'Accept': 'application/json', 
-        'Content-Type': 'application/json' 
-    },
-        body: JSON.stringify(order)  
-    }); 
+//Envoyer la requete POST à l'API
 
-envoi.then(async(response)=>{
-     try{
-         const contenu = await response.json();
-
-         if(response.ok){
-             localStorage.setItem("id",contenu.orderId);
-             //Renvoi vers la page de confirmation
-             window.location = "confirmation.html";
-
-         }else{
-            alert(`problème avec le serveur: erreur ${reponse.status}`)
-         };
-     }catch(e){
-         alert(`erreur qui vient du catch() ${e}`);
-     }
-});
-}
