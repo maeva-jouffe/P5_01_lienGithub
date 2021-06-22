@@ -241,8 +241,3 @@ buttonFormulaire.addEventListener("click", (e) => {
         alert("Une erreur est survenue");
     }
 })
-
-/////////////////////////////////    Confirmation  /////////////////////////////////
-
-//Envoyer la requete POST à l'API
-
