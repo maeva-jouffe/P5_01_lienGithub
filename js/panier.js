@@ -68,9 +68,9 @@ function boutonSupprimerArticle() {
         boutonSupprimer[s].addEventListener("click", (e) => {
             e.preventDefault();
 
-            // Sélectionner l'id qui sera supprimé au clic sur le bouton 'supprimer'
+            // Sélectionner l'index qui sera supprimé au clic sur le bouton 'supprimer'
             let index = e.currentTarget.getAttribute("index_article");
-            // Créer un nouveau tableau contenant tous les id sauf celui qui a été supprimé
+            // Créer un nouveau tableau contenant tous les produits sauf celui qui a été supprimé
             articleAjouteAuPanier = articleAjouteAuPanier.filter(function(elem, i){return(i != index)});
 
             // Envoyer l'info dans le local Storage
