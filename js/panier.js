@@ -3,7 +3,8 @@ function lePanierEstPlein(articleAjouteAuPanier) {
     let panierPlein = "";
 
     //Boucle pour récupérer chaque article du tableau d'articles ajoutés au panier
-    for (resumeArticle of articleAjouteAuPanier) {
+    for ( const i in articleAjouteAuPanier) {
+        const resumeArticle = articleAjouteAuPanier[i];
 
         //Structure HTML pour l'affichage du résumé des articles du panier
         panierPlein += `
@@ -21,7 +22,7 @@ function lePanierEstPlein(articleAjouteAuPanier) {
                     <p class="price">${resumeArticle.price}€</p>
                 </div>
                 <div class="col">
-                <button type="button" class="btn btn-dark" id="supprimer"><i class="far fa-trash-alt"></i>Supprimer</button>
+                <button type="button" class="btn btn-dark" id="supprimer" index_article ="${i}"><i class="far fa-trash-alt"></i>Supprimer</button>
                 </div>
             </div>
         </div>`;
@@ -68,10 +69,9 @@ function boutonSupprimerArticle() {
             e.preventDefault();
 
             // Sélectionner l'id qui sera supprimé au clic sur le bouton 'supprimer'
-            let idSupprime = articleAjouteAuPanier[s]._id;
-
+            let index = e.currentTarget.getAttribute("index_article");
             // Créer un nouveau tableau contenant tous les id sauf celui qui a été supprimé
-            articleAjouteAuPanier = articleAjouteAuPanier.filter(elem => elem._id !== idSupprime);
+            articleAjouteAuPanier = articleAjouteAuPanier.filter(function(elem, i){return(i != index)});
 
             // Envoyer l'info dans le local Storage
             localStorage.setItem("article", JSON.stringify(articleAjouteAuPanier));
@@ -109,6 +109,7 @@ function envoiVersServeur(order) {
         // Convertir les données en JSON
         body: JSON.stringify(order)
     });
+
     // Promise
     envoi.then(async (response) => {
         try {
@@ -123,7 +124,7 @@ function envoiVersServeur(order) {
                 alert(`problème avec le serveur: erreur ${reponse.status}`)
             };
         } catch (err) {
-            alert(`erreur qui vient du catch`);
+            alert(`erreur`);
         }
     });
 }
@@ -174,7 +175,7 @@ buttonFormulaire.addEventListener("click", (e) => {
     //Validation des données du formulaire avant envoi dans le local storage
     function controlPrenom() {
         const prenom = contact.lastName;
-        if (/^[A-Za-z]{2,25}$/.test(prenom)) {
+        if (/^[A-Za-z\s]{2,25}$/.test(prenom)) {
             return true;
         } else {
             alert("Veuillez renseigner correctement votre prénom \nLes chiffres et symboles ne sont pas autorisés \nVotre prénom doit contenir entre 2 et 25 caractères")
@@ -184,7 +185,7 @@ buttonFormulaire.addEventListener("click", (e) => {
 
     function controlNom() {
         const nom = contact.firstName;
-        if (/^[A-Za-z]{2,25}$/.test(nom)) {
+        if (/^[A-Za-z\s]{2,25}$/.test(nom)) {
             return true;
         } else {
             alert("Veuillez renseigner correctement votre nom \nLes chiffres et symboles ne sont pas autorisés \nVotre nom doit contenir entre 2 et 25 caractères")
