@@ -1,0 +1,228 @@
+*{
+    color: #261624;
+}
+
+#logo{
+    width: 20%;
+}
+
+.navbar{
+    background-color: #f3e9f1;
+    border-radius: 0.5em;
+}
+
+.navbar-expand{
+    justify-content: space-around;
+}
+
+.nav-link{
+    font-size:1.5em;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.jumbotron{
+    background-color: rgba(38,22,36,255);
+    margin: 2em 0em 2em 0em;
+}
+
+.jumbotron p{
+    color:#f3e9f1;
+    text-align: center;
+}
+
+h1{
+    color: #f3e9f1;
+    text-align: center;
+    font-family: 'comic sans MS', arial;
+    font-size: 1.5em;
+    padding: 1em;
+}
+
+h1 em{
+    color: #f3e9f1;
+    font-size: 1.7em;
+}
+
+.container-produits{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.blocProduit{
+    max-width: 25em;
+    min-height: 31em;
+    margin: 2em 0.5em 2em 0.5em;
+    cursor: pointer;
+    text-align: center;
+    transform: scale(1);
+    border: 2px solid #261624;
+    padding: 0.5em;
+    background-color: white;
+}
+#commande{
+    color:#f3e9f1;
+    text-align: center;
+}
+#formulaire{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+}
+.blocProduit img{
+    width: 100%;
+    object-fit: cover;
+    height: 20em;
+}
+.blocProduit h2{
+    color:#261624;
+    font-size:2em;
+    padding: 0;
+}
+.blocProduit:hover{
+    transform: scale(1.05);
+}
+
+.fa-shopping-basket{
+    color: #261624;
+}
+
+main{
+    background-color: #f3e9f1;
+}
+
+section{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
+}
+
+.container_page_panier{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.panierVide{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+table{
+    border: 1px solid #261624;
+    text-align: center;
+    width: 20em;
+}
+td, th{
+    border: 1px solid #261624;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.fa-trash-alt{
+    color:#f3e9f1;
+    margin-right: 0.5em;
+}
+
+.total{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+input{
+    width: 20em;
+    height: 2.5em;
+    margin: 0.5em;
+    display: block;
+}
+
+.quantite{
+    font-size: 1.1em;
+    margin-top: 2em;
+}
+
+#inputQuantite{
+    width: 3em;
+}
+
+.idDeCommande, .prixTotalCommande{
+    font-size: 1em;
+   color: #f3e9f1;
+}
+
+.titre{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+.info{
+    font-size: 1.5em;
+    font-family: 'comic sans MS', arial;
+    color:#f3e9f1;
+}
+
+.price{
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+#supprimer{
+    margin-top: 15%;
+}
+
+input[type=submit]{
+    background-color:#261624;
+    color: #f3e9f1;
+}
+
+.container_page_produit img{
+width : 100%;
+padding-left: 2em;
+}
+
+.container_page_panier img{
+    width:80%;
+    border-radius: 100%;
+}
+
+#produitPanier{
+    border: 1px solid #261624;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    background-color: white;
+}
+
+footer{
+    background-color: #261624;
+    height: 6em;
+    margin-top: 2em;
+}
+
+footer ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+footer li{
+    list-style-type: none;
+    margin-top: 2em;
+}
+
+footer a{
+    color:#f3e9f1;
+}
+
+footer :visited{
+    color:#f3e9f1;
+}
